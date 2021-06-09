@@ -14,7 +14,7 @@ public abstract class Animal {
     // The fox's age.
     private int age = 0;
 
-    private static final Random RANDOM = new Random();
+    protected static final Random RANDOM = new Random();
 
     public Animal(boolean randomAge, Field field, Location location) {
         this.field = field;
