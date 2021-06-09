@@ -5,10 +5,9 @@ import java.util.Random;
 
 public abstract class Animal {
     // Whether the animal is alive or not.
-    private boolean alive;
-
+    private boolean alive = true;
     // The fox's position.
-    protected Location location;
+    private Location location;
     // The field occupied.
     protected Field field;
     // Individual characteristics (instance fields).

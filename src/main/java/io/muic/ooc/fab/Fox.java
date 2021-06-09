@@ -34,7 +34,6 @@ public class Fox extends Animal {
      */
     public Fox(boolean randomAge, Field field, Location location) {
         age = 0;
-        setAlive(true);
         this.field = field;
         setLocation(location);
         if (randomAge) {
@@ -62,7 +61,7 @@ public class Fox extends Animal {
             Location newLocation = findFood();
             if (newLocation == null) {
                 // No food found - try to move to a free location.
-                newLocation = field.freeAdjacentLocation(location);
+                newLocation = field.freeAdjacentLocation(getLocation());
             }
             // See if it was possible to move.
             if (newLocation != null) {
@@ -91,7 +90,7 @@ public class Fox extends Animal {
      * @return Where food was found, or null if it wasn't.
      */
     private Location findFood() {
-        List<Location> adjacent = field.adjacentLocations(location);
+        List<Location> adjacent = field.adjacentLocations(getLocation());
         Iterator<Location> it = adjacent.iterator();
         while (it.hasNext()) {
             Location where = it.next();

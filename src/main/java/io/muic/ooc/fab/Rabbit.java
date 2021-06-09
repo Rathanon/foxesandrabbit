@@ -27,7 +27,6 @@ public class Rabbit extends Animal {
      */
     public Rabbit(boolean randomAge, Field field, Location location) {
         age = 0;
-        setAlive(true);
         this.field = field;
         setLocation(location);
         if (randomAge) {
@@ -46,7 +45,7 @@ public class Rabbit extends Animal {
         if (isAlive()) {
             giveBirth(newRabbits);
             // Try to move into a free location.
-            Location newLocation = field.freeAdjacentLocation(location);
+            Location newLocation = field.freeAdjacentLocation(getLocation());
             if (newLocation != null) {
                 setLocation(newLocation);
             } else {
