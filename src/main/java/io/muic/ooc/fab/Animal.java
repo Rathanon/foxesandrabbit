@@ -24,6 +24,39 @@ public abstract class Animal {
         }
     }
 
+    protected abstract Location moveToNewLocation();
+
+    public void act(List<Animal> newAnimals){
+        incrementAge();
+        if (isAlive()) {
+            giveBirth(newAnimals);
+            // Try to move into a free location.
+            Location newLocation = moveToNewLocation();
+
+            if (newLocation != null) {
+                setLocation(newLocation);
+            } else {
+                // Overcrowding.
+                setDead();
+            }
+        }
+
+    }
+
+
+    protected abstract Animal breedOne(boolean randomAge, Field field, Location location);
+
+    protected void giveBirth(List<Animal> newAnimals) {
+        // New animals are born into adjacent locations.
+        // Get a list of adjacent free locations.
+        List<Location> free = field.getFreeAdjacentLocations(getLocation());
+        int births = breed();
+        for (int b = 0; b < births && free.size() > 0; b++) {
+            Location loc = free.remove(0);
+            Animal young =  breedOne(false, field, loc);
+            newAnimals.add(young);
+        }
+    }
     /**
      * Check whether the animal is alive or not.
      *
@@ -111,25 +144,6 @@ public abstract class Animal {
 
     protected abstract int getBreedingAge();
 
-    protected abstract Animal createYoung(boolean randomAge, Field field, Location location);
-
-    /**
-     * Check whether or not this rabbit is to give birth at this step. New
-     * births will be made into free adjacent locations.
-     *
-     * @param newRabbits A list to return newly born rabbits.
-     */
-    protected void giveBirth(List newRabbits) {
-        // New rabbits are born into adjacent locations.
-        // Get a list of adjacent free locations.
-        List<Location> free = field.getFreeAdjacentLocations(location);
-        int births = breed();
-        for (int b = 0; b < births && free.size() > 0; b++) {
-            Location loc = free.remove(0);
-            Animal young = createYoung(false, field, loc);
-            newRabbits.add(young);
-        }
-    }
 
 
 }

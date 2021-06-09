@@ -16,25 +16,14 @@ public class Rabbit extends Animal {
         super(randomAge, field, location);
     }
 
-    /**
-     * This is what the rabbit does most of the time - it runs around. Sometimes
-     * it will breed or die of old age.
-     *
-     * @param newRabbits A list to return newly born rabbits.
-     */
-    public void run(List<Rabbit> newRabbits) {
-        incrementAge();
-        if (isAlive()) {
-            giveBirth(newRabbits);
-            // Try to move into a free location.
-            Location newLocation = field.freeAdjacentLocation(getLocation());
-            if (newLocation != null) {
-                setLocation(newLocation);
-            } else {
-                // Overcrowding.
-                setDead();
-            }
-        }
+    @Override
+    protected Location moveToNewLocation() {
+        return field.freeAdjacentLocation(getLocation());
+    }
+
+    @Override
+    protected Animal breedOne(boolean randomAge, Field field, Location location) {
+        return new Rabbit(randomAge, field, location);
     }
 
     @Override
@@ -57,8 +46,5 @@ public class Rabbit extends Animal {
         return 5;
     }
 
-    @Override
-    protected Animal createYoung(boolean randomAge, Field field, Location location) {
-        return new Rabbit(randomAge, field, location);
-    }
+
 }
