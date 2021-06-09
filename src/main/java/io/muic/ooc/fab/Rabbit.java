@@ -26,12 +26,7 @@ public class Rabbit extends Animal {
      * @param location The location within the field.
      */
     public Rabbit(boolean randomAge, Field field, Location location) {
-        age = 0;
-        this.field = field;
-        setLocation(location);
-        if (randomAge) {
-            age = RANDOM.nextInt(MAX_AGE);
-        }
+        super(randomAge, field, location);
     }
 
     /**
