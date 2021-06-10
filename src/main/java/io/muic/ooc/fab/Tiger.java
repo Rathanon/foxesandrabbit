@@ -8,6 +8,7 @@ public class Tiger extends Animal {
     // The food value of a single rabbit. In effect, this is the
     // number of steps a fox can go before it has to eat again.
     private static final int RABBIT_FOOD_VALUE = 9;
+    private static final int FOX_FOOD_VALUE = 3;
 
     // The fox's food level, which is increased by eating rabbits.
     private int foodLevel;
@@ -76,6 +77,13 @@ public class Tiger extends Animal {
                 if (rabbit.isAlive()) {
                     rabbit.setDead();
                     foodLevel = RABBIT_FOOD_VALUE;
+                    return where;
+                }
+            } else if(animal instanceof Fox){
+                Fox fox = (Fox) animal;
+                if(fox.isAlive()){
+                    fox.setDead();
+                    foodLevel = FOX_FOOD_VALUE;
                     return where;
                 }
             }
