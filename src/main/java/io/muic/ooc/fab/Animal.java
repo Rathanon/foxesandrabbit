@@ -16,7 +16,7 @@ public abstract class Animal {
 
     protected static final Random RANDOM = new Random();
 
-    public Animal(boolean randomAge, Field field, Location location) {
+    public void initialize(boolean randomAge, Field field, Location location) {
         this.field = field;
         setLocation(location);
         if (randomAge) {
@@ -44,7 +44,9 @@ public abstract class Animal {
     }
 
 
-    protected abstract Animal breedOne(boolean randomAge, Field field, Location location);
+    private Animal breedOne(boolean randomAge, Field field, Location location){
+        return AnimalFactory.createAnimal(getClass(), field, location);
+    }
 
     protected void giveBirth(List<Animal> newAnimals) {
         // New animals are born into adjacent locations.
