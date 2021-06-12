@@ -3,12 +3,13 @@ package io.muic.ooc.fab;
 import java.util.Iterator;
 import java.util.List;
 
-public class Tiger extends Animal {
+public class Hunter extends Animal {
     // Characteristics shared by all foxes (class variables).
     // The food value of a single rabbit. In effect, this is the
     // number of steps a Tiger can go before it has to eat again.
     private static final int RABBIT_FOOD_VALUE = 9;
     private static final int FOX_FOOD_VALUE = 3;
+    private static final int TIGER_FOOD_VALUE = 1;
 
     // The fox's food level, which is increased by eating rabbits.
     private int foodLevel;
@@ -46,19 +47,19 @@ public class Tiger extends Animal {
      */
     @Override
     public void act(List<Animal> newAnimal) {
-        incrementHunger();
+//        incrementHunger();
         super.act(newAnimal);
     }
 
     /**
      * Make this fox more hungry. This could result in the fox's death.
      */
-    private void incrementHunger() {
-        foodLevel--;
-        if (foodLevel <= 0) {
-            setDead();
-        }
-    }
+//    private void incrementHunger() {
+//        foodLevel--;
+//        if (foodLevel <= 0) {
+//            setDead();
+//        }
+//    }
 
     /**
      * Look for rabbits and foxes adjacent to the current location. Only the first live
@@ -79,16 +80,24 @@ public class Tiger extends Animal {
                     foodLevel = RABBIT_FOOD_VALUE;
                     return where;
                 }
-            } else if(animal instanceof Fox){
+            } else if (animal instanceof Fox) {
                 Fox fox = (Fox) animal;
-                if(fox.isAlive()){
+                if (fox.isAlive()) {
                     fox.setDead();
                     foodLevel = FOX_FOOD_VALUE;
                     return where;
                 }
+            } else if (animal instanceof Tiger) {
+                Tiger tiger = (Tiger) animal;
+                if (tiger.isAlive()) {
+                    tiger.setDead();
+                    foodLevel = TIGER_FOOD_VALUE;
+                    return where;
+                }
             }
         }
-        return null;
+            return null;
+
     }
 
     @Override
