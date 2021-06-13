@@ -6,16 +6,16 @@ import java.util.List;
 public class Hunter extends Animal {
     // Characteristics shared by all foxes (class variables).
     // The food value of a single rabbit. In effect, this is the
-    // number of steps a Tiger can go before it has to eat again.
+    // number of steps a hunter can go before it has to eat again.
     private static final int RABBIT_FOOD_VALUE = 9;
     private static final int FOX_FOOD_VALUE = 3;
     private static final int TIGER_FOOD_VALUE = 1;
 
-    // The fox's food level, which is increased by eating rabbits.
+    // The hunters's food level, which is increased by eating rabbits.
     private int foodLevel;
 
     /**
-     * Create a Tiger. A Tiger can be created as a new born (age zero and not
+     * Create a Hunter. A Hunter can be created as a new born (age zero and not
      * hungry) or with a random age and food level.
      *
      * @param randomAge If true, the tiger will have random age and hunger level.
@@ -40,9 +40,7 @@ public class Hunter extends Animal {
 
 
     /**
-     * This is what the tiger does most of the time: it hunts for rabbits and foxes. In the
-     * process, it might breed, die of hunger, or die of old age.
-     *
+     * This is what the hunter does most of the time: it hunts for rabbits, foxes and tiger. It is immortal
      * @param newAnimal A list to return newly born foxes.
      */
     @Override
@@ -52,7 +50,7 @@ public class Hunter extends Animal {
     }
 
     /**
-     * Make this fox more hungry. This could result in the fox's death.
+     * Make this hunter more hungry. This could result in the animals's death.
      */
 //    private void incrementHunger() {
 //        foodLevel--;
@@ -62,8 +60,7 @@ public class Hunter extends Animal {
 //    }
 
     /**
-     * Look for rabbits and foxes adjacent to the current location. Only the first live
-     * rabbit is eaten.
+     * Look for rabbits, foxes and tiger adjacent to the current location.
      *
      * @return Where food was found, or null if it wasn't.
      */
